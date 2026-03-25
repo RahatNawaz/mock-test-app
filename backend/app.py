@@ -2,29 +2,13 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient
 from bson import ObjectId
-from dotenv import load_dotenv
-import os
-from pymongo import MongoClient
-import certifi
 
 app = Flask(__name__)
 CORS(app)
 
-print("✅ Connected to MongoDB! Collections:", db.list_collection_names())
-
-
-
 # MongoDB connection
-
-# Load .env variables
-load_dotenv()
-
-# Get Mongo URI from .env
-MONGO_URI = os.getenv("MONGO_URI")
-
-# Connect to MongoDB
-client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
-db = client.get_database("mocktest_app")  # replace with your database name
+client = MongoClient("mongodb://localhost:27017/")
+db = client["mocktestsample"]
 
 modules_collection = db["modules"]
 questions_collection = db["questions"]
